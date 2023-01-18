@@ -1,0 +1,57 @@
+.profile-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.profile-head {
+font-size: 20px;
+}
+.profile-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-top: 5px;
+    list-style: none;
+    font-size: 18px;
+    background-color: #FFFFEA;
+}
+.profile-title {
+    font-size: 50px;
+}
+.profile-button {
+    margin-right: 50px;
+}
+.image-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 200px;
+    height: 200px;
+    margin-top: 20px;
+}
+.profile-img {
+    margin-right: 50px;
+    max-width: 150px;
+    height: auto;
+}
+.bottom-box {
+    margin-top: 60px;
+}
+.my-projects {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.project-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.projects {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 750px;
+}

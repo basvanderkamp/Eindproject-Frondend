@@ -1,0 +1,32 @@
+.label {
+    display: flex;
+    flex-direction: row;
+    margin-top: 4px;
+}
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin: 20px;
+    padding-bottom: 20px;
+}
+.terms {
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+}
+.bottem-text {
+    margin: 20px;
+}
+.preview-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 20px;
+
+}
+.image-preview {
+    max-width: 150px;
+    height: auto;
+    margin-top: 10px;
+}

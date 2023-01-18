@@ -1,0 +1,69 @@
+
+.tile-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+.button-container {
+    height: 100px;
+}
+.tile {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 450px;
+    margin: 40px 20px 10px 20px;
+    padding: 5px;
+    background-color: #3F6C51;
+    border-radius: 10px;
+}
+
+.tile-h2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 20px;
+    color: #FFFFEA;
+    background-color: #3F6C51;
+}
+.tile-text {
+    display: flex;
+    flex-direction: row;
+    margin-left: 10px;
+    font-size: 20px ;
+    color: #FFFFEA;
+    background-color: #3F6C51;
+}
+.tile-h4 {
+    display: flex;
+    flex-direction: row;
+    margin-left: 10px;
+    margin-top: 20px;
+    color: #FFFFEA;
+    background-color: #3F6C51;
+
+}
+.tile-p {
+    display: flex;
+    flex-direction: row;
+    margin-left: 10px;
+    color: #FFFFEA;
+    background-color: #3F6C51;
+}
+.tile-client {
+    display: flex;
+    flex-direction: row;
+    margin-left: 10px;
+    margin-top: 20px;
+    color: #FFFFEA;
+    background-color: #3F6C51;
+}
+.tile-link {
+    text-decoration-line: none;
+}
+.tile-link:hover {
+    background-color: #483C32;
+    border-radius: 15px;
+}

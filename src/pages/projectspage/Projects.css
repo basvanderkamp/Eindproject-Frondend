@@ -1,0 +1,29 @@
+.tiles-containter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.project-text-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    width: 100%;
+    margin-top: 50px;
+}
+
+.project-text {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    font-size: 25px;
+    width: 600px;
+}
+ p {
+    background-color: #FFFFEA;
+}
