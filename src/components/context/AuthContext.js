@@ -48,7 +48,7 @@ function AuthContextProvider({children}) {
         console.log("gebruiker is uitgelogd")
         localStorage.removeItem('token');
         setStatus("done")
-        navigate("/")
+        navigate("/login")
     }
 
 
@@ -76,7 +76,7 @@ function AuthContextProvider({children}) {
         authAxios,
         login: loginFunction,
         logout: logoutFunction,
-
+        navigate,
     }
     return (
         <AuthContext.Provider value={data}>

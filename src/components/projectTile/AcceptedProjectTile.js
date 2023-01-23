@@ -1,19 +1,14 @@
 import "./ProjectTiles.css"
-import React, {useContext} from "react";
-import {AuthContext} from "../context/AuthContext";
-import axios from "axios";
-import {useNavigate} from "react-router-dom";
+import React from "react";
+
 
 
 
 const AcceptedProjectTile = ({assignment}) => {
-    const {username, authAxios} = useContext(AuthContext);
-    const navigate = useNavigate();
-
 
     return(
         <>
-            <a className="tile-link" href="/project">
+            <a className="tile-link" href={"/project/" + assignment.title}>
                 <div className="tile" key={assignment.id}>
                     <h2 className="tile-h2">{assignment.title}</h2>
                     <p className="tile-text">{assignment.description}</p>

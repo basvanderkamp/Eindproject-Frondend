@@ -1,11 +1,11 @@
-import React from "react";
-import {useNavigate} from "react-router-dom";
+import React, {useContext} from "react";
 import "./HomePage.css"
+import {AuthContext} from "../../components/context/AuthContext";
 
 
 
 function HomePage() {
-    const navigate = useNavigate();
+    const {navigate} = useContext(AuthContext);
 
     return(
         <>

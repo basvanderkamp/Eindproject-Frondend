@@ -6,10 +6,8 @@ import axios from "axios";
 
 function Login() {
 
-    const {isAuthenticated, noAuthAxios, login, username, setUsername} = useContext(AuthContext);
+    const {navigate, isAuthenticated, noAuthAxios, login, username, setUsername} = useContext(AuthContext);
     const [password, setPassword] = useState('');
-    const navigate = useNavigate()
-
 
 
     const loginUser = async (e) => {

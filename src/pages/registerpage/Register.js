@@ -19,42 +19,51 @@ function Register() {
     const [previewUrl, setPreviewUrl] = useState('');
     const [file, setFile] = useState('');
 
-    const {username, setUsername, noAuthAxios} = useContext(AuthContext);
-    const navigate = useNavigate();
+    const {navigate, username, setUsername, noAuthAxios} = useContext(AuthContext);
 
     const RegisterUser = async (e) => {
         e.preventDefault();
 
+
         try {
-            await noAuthAxios.post(`/users`, {
+            const response = await noAuthAxios.post(`/users`, {
                     username: username,
                     password: password,
                     enabled : true,
                     apikey: ""
                     })
+
+            if(response.status === 201) {
+                void RegisterClient()
+            }
         } catch ( e ) {
             if(axios.isCancel(e)){
                 console.log('The axios request was cancelled')
             } else {
-                console.error(e)
+                console.error(e.response.data.message)
             }
         }
-        void RegisterClient()
+
+
     }
     const RegisterClient = async () => {
 
         try {
-            await noAuthAxios.post(`/clients`, {
-                username: username,
-                firstname: firstname,
-                lastname: lastname,
-                mobile: mobile,
-                adres: adres,
-                place: place,
-                zipcode: zipcode,
-                email: email,
-                story: story
-                })
+            const response = await noAuthAxios.post(`/clients`, {
+                    username: username,
+                    firstname: firstname,
+                    lastname: lastname,
+                    mobile: mobile,
+                    adres: adres,
+                    place: place,
+                    zipcode: zipcode,
+                    email: email,
+                    story: story
+                    })
+
+            if(response.status === 201){
+                void AssignClientToUser()
+            }
         } catch ( e ) {
             if(axios.isCancel(e)){
                 console.log('The axios request was cancelled')
@@ -62,14 +71,17 @@ function Register() {
                 console.error(e)
             }
         }
-        void AssignClientToUser()
 
     }
     const AssignClientToUser = async () => {
 
         try {
-            await noAuthAxios.put(`/users/${username}/clients/${username}`, {
-            })
+            const response = await noAuthAxios.put(`/users/${username}/clients/${username}`, {
+                    })
+
+            if (response.status === 200){
+                void UploadProfilePicture()
+            }
         } catch ( e ) {
             if(axios.isCancel(e)){
                 console.log('The axios request was cancelled')
@@ -77,8 +89,7 @@ function Register() {
                 console.error(e)
             }
         }
-        void UploadProfilePicture()
-        navigate('/login')
+
     }
 
     const UploadProfilePicture = async () => {
@@ -87,13 +98,15 @@ function Register() {
         formData.append("file", file)
 
         try {
-            const result = await axios.post(`http://localhost:8080/clients/${username}/upload`, formData,
+            const response = await axios.post(`http://localhost:8080/clients/${username}/upload`, formData,
                 {
                     headers: {
                         "Content-Type": "multipart/form-data"
                     },
                 })
-            console.log(result.data);
+            if (response.status === 200) {
+                navigate('/login')
+            }
 
         } catch (e) {
             if (axios.isCancel(e)) {

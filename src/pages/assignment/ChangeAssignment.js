@@ -1,79 +1,85 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import "./Assignment.css"
 import axios from "axios";
 import {AuthContext} from "../../components/context/AuthContext";
+import {useParams} from "react-router-dom";
 
 
 
-function Assignment() {
+function ChangeAssignment() {
 
-    const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [essentials, setEssentials] = useState('');
     const [demands, setDemands] = useState('');
     const [reward, setReward] = useState('');
-    const [file, setFile] =useState();
+    const [client, setClient] = useState('')
     const {navigate, username, authAxios} = useContext(AuthContext);
+    const { id } = useParams();
 
-    const makeAssignment = async (e) => {
-        e.preventDefault();
+    useEffect( () => {
+        const fetchAssignment = async () => {
 
-        try {
-            await authAxios.post(`/assignments`, {
-                title: title,
-                description: description,
-                essentials : essentials,
-                demands: demands,
-                reward: reward
-            })
-        } catch ( e ) {
-            if(axios.isCancel(e)){
-                console.log('The axios request was cancelled')
-            } else {
-                console.error(e)
+            try {
+                const response = await authAxios.get( `/assignments/${id}`, {});
+                setDescription(response.data.description)
+                setEssentials(response.data.essentials)
+                setDemands(response.data.demands)
+                setReward(response.data.reward)
+                setClient(response.data.client.username)
+            } catch ( e ) {
+                if(axios.isCancel(e)){
+                    console.log('The axios request was cancelled')
+                } else {
+                    console.error(e)
+                }
             }
         }
-        AssignAssignmentToClient();
+        void fetchAssignment()
+    }, [id] )
+
+
+    const ChangeAssignment = async (e) => {
+        e.preventDefault();
+
+        if (client === username){
+
+            try {
+                await authAxios.patch(`/assignments/${id}`, {
+                    description: description,
+                    essentials : essentials,
+                    demands: demands,
+                    reward: reward
+                })
+            } catch ( e ) {
+                if(axios.isCancel(e)){
+                    console.log('The axios request was cancelled')
+                } else {
+                    console.error(e)
+                }
+            }
+            setTimeout(navigate("/profile"), 300);
+        } else {
+            navigate("/")
+            console.log("U bent niet de eigenaar van dit project en kunt hem dus niet wijzigen.")
+        }
 
     }
 
-     const AssignAssignmentToClient = async () => {
 
-         try {
-             await authAxios.put(`/clients/${username}/assignments/${title}`, {
-             })
-         } catch ( e ) {
-             if(axios.isCancel(e)){
-                 console.log('The axios request was cancelled')
-             } else {
-                 console.error(e)
-             }
-         }
-         navigate('/profile')
-     }
 
 
     return (
         <>
             <div className="outer-box">
                 <div className="inner-box">
-                    <h1 className="title">Hulp nodig?</h1>
-                    <p className="text-box">Vul de onderstaande velden in en klik op opdracht aanmaken.</p>
+                    <h1 className="title">Hier kun je jouw opdracht wijzigen.</h1>
+                    <p className="text-box">Vul de onderstaande velden in en klik op Wijzigen. Let op de titel is niet te wijzigen.</p>
                     <form className="form" >
 
-                        <section>
-                            <label className="label" htmlFor="title-field">Titel:</label>
-                            <input
-                                size={40}
-                                type="text"
-                                value={title}
-                                onChange={(e) => setTitle(e.target.value)}
-                            />
-                        </section>
+
                         <section>
                             <label className="label" htmlFor="description-field">Omschrijving:</label>
                             <textarea
-                                size={40}
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
                                 rows={5}
@@ -108,23 +114,11 @@ function Assignment() {
                             />
                         </section>
 
-                        <section>
-                            <label className="label" htmlFor="story-field">Bestand Kiezen:</label>
-                            <input
-                                size={40}
-                                type="file"
-                                value={file}
-                                onChange={(e) => setFile(e.target.value)}
-
-                            />
-                        </section>
-
-                        <button className="button" type="submit"  onClick={makeAssignment}>Verzend</button>
+                        <button className="button" type="submit"  onClick={ChangeAssignment}>Wijzigen</button>
                     </form>
-
                 </div>
             </div>
         </>
     );
 }
-export default Assignment;
+export default ChangeAssignment;

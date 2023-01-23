@@ -1,9 +1,8 @@
 import axios from "axios";
 import React, {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../../components/context/AuthContext";
-import {useNavigate} from "react-router-dom";
 import "./Profile.css"
-import profielfoto from "./../../assets/profielfotoExample.jpg"
+import fakeProfilePic from "./../../assets/profielfotoExample.jpg"
 import MyProjectTile from "../../components/projectTile/MyProjectTile";
 import AcceptedProjectTile from "../../components/projectTile/AcceptedProjectTile";
 
@@ -16,42 +15,29 @@ function Profile() {
     const [myProjects, setMyProjects] = useState([])
     const [activeProjects, setActiveProjects] = useState([])
     const [picture, setPicture] = useState("")
-    const { username, authAxios, status, setStatus} = useContext(AuthContext);
-    const navigate = useNavigate();
-    console.log(username)
-
-
-
+    const {navigate, username, authAxios} = useContext(AuthContext);
 
     useEffect( () => {
-    const fetchClient = async () => {
+        const fetchClient = async () => {
 
-        try {
-            const response = await authAxios.get( `/clients/${username}`, {});
-            console.log(response.data)
-            setClient(response.data);
-            setMyProjects(response.data.assignments)
-            setActiveProjects(response.data.executor.assignments)
-            setPicture(response.data.file.url)
+            try {
+                const response = await authAxios.get( `/clients/${username}`, {});
+                console.log(response.data)
+                setClient(response.data);
+                setMyProjects(response.data.assignments)
+                setActiveProjects(response.data.executor.assignments)
+                setPicture("data:image/jpeg;base64," + response.data.fileDocument.docFile)
 
-
-        } catch ( e ) {
-            if(axios.isCancel(e)){
-                console.log('The axios request was cancelled')
-            } else {
-                console.error(e)
-
+            } catch ( e ) {
+                if(axios.isCancel(e)){
+                    console.log('The axios request was cancelled')
+                } else {
+                    console.error(e)
+                }
             }
         }
-
-
-    }
-    
         void fetchClient()
-
     }, [username] )
-     
-
 
 
     return(
@@ -68,13 +54,13 @@ function Profile() {
                         <span>
                             <h4 className="profile-head">Gebruikers info</h4>
                             <ul className="profile-list">
-                                <li>voornaam: {client.firstname}</li>
-                                <li>achternaam: {client.lastname}</li>
-                                <li>Mobiel: {client.mobile}</li>
-                                <li>Adres: {client.adres}</li>
-                                <li>Plaats: {client.place}</li>
-                                <li>Postcode: {client.zipcode}</li>
-                                <li>Email: {client.email}</li>
+                                <li className="list">voornaam: {client.firstname}</li>
+                                <li className="list">achternaam: {client.lastname}</li>
+                                <li className="list">Mobiel: {client.mobile}</li>
+                                <li className="list">Adres: {client.adres}</li>
+                                <li className="list">Plaats: {client.place}</li>
+                                <li className="list">Postcode: {client.zipcode}</li>
+                                <li className="list">Email: {client.email}</li>
                             </ul>
                         </span>
                         <button className="button profile-button" type="button" onClick={() => navigate('/assignments')} >Maak een project</button>
@@ -95,7 +81,6 @@ function Profile() {
                                 <h4 className="projects profile-head">Mijn opdrachten</h4>
                             </div>
                         </div>
-
                         <div className="project-container">
                             <div className="projects">
                                 {Object.keys(myProjects).length === 0 &&
@@ -127,11 +112,9 @@ function Profile() {
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </>
     )
-
 }
 export default Profile;

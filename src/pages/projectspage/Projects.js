@@ -11,7 +11,7 @@ import ProjectTile from "../../components/projectTile/ProjectTile";
 
 function Projects()  {
     const [list, setList] = useState([]);
-    const {isAuthenticated, login, baseUrl, authAxios} = useContext(AuthContext);
+    const {authAxios} = useContext(AuthContext);
 
     const fetchAssignments = async () => {
 

@@ -7,8 +7,7 @@ import {useNavigate} from "react-router-dom";
 
 
 const ProjectTile = ({assignment}) => {
-    const {username, authAxios} = useContext(AuthContext);
-    const navigate = useNavigate();
+    const {navigate, username, authAxios} = useContext(AuthContext);
 
     const SetExecutor = async () => {
 
@@ -22,10 +21,10 @@ const ProjectTile = ({assignment}) => {
                 console.error(e)
             }
         }
-        navigate("/profile")
-
+        navigate("/project/" + assignment.title)
     }
-    console.log(assignment)
+
+
     return(
     <>
         {assignment.assignmentStatus === "AVAILABLE" && assignment.client.username !== username &&
@@ -47,8 +46,6 @@ const ProjectTile = ({assignment}) => {
         </div>
         }
     </>
-
   )
-
 }
 export default ProjectTile;

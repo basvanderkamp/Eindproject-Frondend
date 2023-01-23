@@ -11,6 +11,7 @@ import Footer from "./components/footer/Footer";
 import Projects from "./pages/projectspage/Projects";
 import Assignment from "./pages/assignment/Assignment";
 import ExecuteProject from "./pages/executeProject/ExecuteProject";
+import ChangeAssignment from "./pages/assignment/ChangeAssignment";
 
 function App() {
     const {isAuthenticated} = useContext(AuthContext);
@@ -20,13 +21,13 @@ function App() {
             <div className="content">
                 <Routes>
                     <Route path="/" element={<HomePage/>}/>
+                    <Route path="/login" element={<Login/>}/>
+                    <Route path="/register" element={<Register/>}/>
                     <Route path="/profile" element={isAuthenticated ? <Profile /> : <Navigate to="/"/>}/>
                     <Route path="/projects" element={isAuthenticated ? <Projects/> : <Navigate to="/"/>}/>
                     <Route path="/assignments" element={isAuthenticated ? <Assignment/> : <Navigate to="/"/>}/>
-                    <Route path="/project" element={isAuthenticated ? <ExecuteProject/>: <Navigate to="/"/>}/>
-                    <Route path="/login" element={<Login/>}/>
-                    <Route path="/register" element={<Register/>}/>
-
+                    <Route path="/project/:id" element={isAuthenticated ? <ExecuteProject/>: <Navigate to="/"/>}/>
+                    <Route path="/changeAssignment/:id" element={isAuthenticated ? <ChangeAssignment/>: <Navigate to="/"/>}/>
                 </Routes>
             </div>
             <Footer/>
