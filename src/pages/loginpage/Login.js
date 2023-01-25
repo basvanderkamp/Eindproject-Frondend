@@ -3,6 +3,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import {AuthContext} from "../../components/context/AuthContext"
 import axios from "axios";
 import Button from "../../helpers/button/Button";
+import Section from "../../helpers/formSections/FormSection";
 
 
 function Login() {
@@ -40,26 +41,17 @@ function Login() {
                 <h1 className="title">Inloggen</h1>
                 <p className="text-box">Vul de onderstaande velden in en klik op Log in.</p>
                 <form className="form">
-                    <section>
-                        <label className="label" htmlFor="user-field">Gebruikersnaam</label>
-                        <input
-                            name="username"
-                            id="user-field"
-                            type="text"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                        />
-                    </section>
-                    <section>
-                        <label className="label" htmlFor="password-field-field">Wachtwoord</label>
-                        <input
-                            name="password"
-                            id="password-field"
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                    </section>
+                    <Section
+                        labelText="Gebruikersnaam:"
+                        value={username}
+                        setValue={setUsername}
+                    />
+                    <Section
+                        labelText="Wachtwoord:"
+                        value={password}
+                        setValue={setPassword}
+                    />
+
                     <Button
                         styling="button"
                         toBeDisabled={!username || !password || isAuthenticated === true}

@@ -2,6 +2,7 @@ import React, {useContext, useState} from 'react';
 import axios from "axios";
 import {AuthContext} from "../../components/context/AuthContext";
 import Button from "../../helpers/button/Button";
+import Section from "../../helpers/formSections/FormSection";
 
 
 
@@ -60,18 +61,13 @@ function Assignment() {
                     <h1 className="title">Hulp nodig?</h1>
                     <p className="text-box">Vul de onderstaande velden in en klik op opdracht aanmaken.</p>
                     <form className="form" >
-
+                        <Section
+                            labelText="Titel:"
+                            value={title}
+                            setValue={setTitle}
+                        />
                         <section>
-                            <label className="label" htmlFor="title-field">Titel:</label>
-                            <input
-                                size={40}
-                                type="text"
-                                value={title}
-                                onChange={(e) => setTitle(e.target.value)}
-                            />
-                        </section>
-                        <section>
-                            <label className="label" htmlFor="description-field">Omschrijving:</label>
+                            <label className="label">Omschrijving:</label>
                             <textarea
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
@@ -79,43 +75,22 @@ function Assignment() {
                                 cols={40}
                             />
                         </section>
-                        <section>
-                            <label className="label" htmlFor="essentials-field">Benodigdheden:</label>
-                            <input
-                                size={40}
-                                type="text"
-                                value={essentials}
-                                onChange={(e) => setEssentials(e.target.value)}
-                            />
-                        </section>
-                        <section>
-                            <label className="label" htmlFor="demands-field">Eisen:</label>
-                            <input
-                                size={40}
-                                type="text"
-                                value={demands}
-                                onChange={(e) => setDemands(e.target.value)}
-                            />
-                        </section>
-                        <section>
-                            <label className="label" htmlFor="reward-field">Beloning:</label>
-                            <input
-                                size={40}
-                                type="text"
-                                value={reward}
-                                onChange={(e) => setReward(e.target.value)}
-                            />
-                        </section>
-                        <section>
-                            <label className="label" htmlFor="story-field">Bestand Kiezen:</label>
-                            <input
-                                size={40}
-                                type="file"
-                                value={file}
-                                onChange={(e) => setFile(e.target.value)}
+                        <Section
+                            labelText="Benodigdheden:"
+                            value={essentials}
+                            setValue={setEssentials}
+                        />
+                        <Section
+                            labelText="Eisen:"
+                            value={demands}
+                            setValue={setDemands}
+                        />
+                        <Section
+                            labelText="Beloning:"
+                            value={reward}
+                            setValue={setReward}
+                        />
 
-                            />
-                        </section>
                         <Button
                             styling="button"
                             functionCall={makeAssignment}

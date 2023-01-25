@@ -4,6 +4,7 @@ import "./Register.css"
 import axios from "axios";
 import {AuthContext} from "../../components/context/AuthContext";
 import Button from "../../helpers/button/Button";
+import Section from "../../helpers/formSections/FormSection";
 
 function Register() {
 
@@ -133,102 +134,54 @@ function Register() {
                     <h1 className="title">Registreren</h1>
                     <p className="text-box">Vul de onderstaande velden in en klik op registreren.</p>
                     <form className="form">
-
+                        <Section
+                            labelText="Gebruikersnaam:"
+                            value={username}
+                            setValue={setUsername}
+                        />
+                        <Section
+                            labelText="Wachtwoord:"
+                            value={password}
+                            setValue={setPassword}
+                        />
+                        <Section
+                            labelText="Voornaam:"
+                            value={firstname}
+                            setValue={setFirstname}
+                        />
+                        <Section
+                            labelText="Achternaam:"
+                            value={lastname}
+                            setValue={setLastname()}
+                        />
+                        <Section
+                            labelText="Telefoon nummer:"
+                            value={mobile}
+                            setValue={setMobile()}
+                        />
+                        <Section
+                            labelText="Adres met huisnummer:"
+                            value={adres}
+                            setValue={setAdres()}
+                        />
+                        <Section
+                            labelText="Plaats:"
+                            value={place}
+                            setValue={setPlace}
+                        />
+                        <Section
+                            labelText="Postcode:"
+                            value={zipcode}
+                            setValue={setZipcode}
+                        />
+                        <Section
+                            labelText="E-mailadres:"
+                            value={email}
+                            setValue={setEmail}
+                        />
                         <section>
-                            <label className="label" htmlFor="username-field">Gebruikersnaam</label>
-                            <input
-                                name="username"
-                                id="username-field"
-                                type="text"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
-                            />
-                        </section>
-                        <section>
-                            <label className="label" htmlFor="password-field">Wachtwoord</label>
-                            <input
-                                name="password"
-                                id="password-field"
-                                type="text"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                        </section>
-                        <section>
-                            <label className="label" htmlFor="firstname-field">Voornaam</label>
-                            <input
-                                name="firstname"
-                                id="firstname-field"
-                                type="text"
-                                value={firstname}
-                                onChange={(e) => setFirstname(e.target.value)}
-                            />
-                        </section>
-                        <section>
-                            <label className="label" htmlFor="lastname-field">Achternaam</label>
-                            <input
-                                name="lastname"
-                                id="lastname-field"
-                                type="text"
-                                value={lastname}
-                                onChange={(e) => setLastname(e.target.value)}
-                            />
-                        </section>
-                        <section>
-                            <label className="label" htmlFor="mobile-field">Telefoon nummer</label>
-                            <input
-                                name="mobile"
-                                id="mobile-field"
-                                type="text"
-                                value={mobile}
-                                onChange={(e) => setMobile(e.target.value)}
-                            />
-                        </section>
-                        <section>
-                            <label className="label" htmlFor="adres-field">Adres</label>
-                            <input
-                                name="adres"
-                                id="adres-field"
-                                type="text"
-                                value={adres}
-                                onChange={(e) => setAdres(e.target.value)}
-                            />
-                        </section>
-                        <section>
-                            <label className="label" htmlFor="place-field">Plaats</label>
-                            <input
-                                name="place"
-                                id="place-field"
-                                type="text"
-                                value={place}
-                                onChange={(e) => setPlace(e.target.value)}
-                            />
-                        </section>
-                        <section>
-                            <label className="label" htmlFor="zipcode-field">Postcode</label>
-                            <input
-                                name="zipcode"
-                                id="zipcode-field"
-                                type="text"
-                                value={zipcode}
-                                onChange={(e) => setZipcode(e.target.value)}
-                            />
-                        </section>
-                        <section>
-                            <label className="label" htmlFor="email-field">E-mail</label>
-                            <input
-                                name="email"
-                                id="email-field"
-                                type="text"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                            />
-                        </section>
-                        <section>
-                            <label className="label" htmlFor="story-field">Mijn Verhaal</label>
+                            <label className="label" >Mijn Verhaal:</label>
                             <textarea
-                                name="story"
-                                id="story-field"
                                 value={story}
                                 onChange={(e) => setStory(e.target.value)}
                                 rows={5}
@@ -245,8 +198,7 @@ function Register() {
                             />
                         </section>
                         {previewUrl &&
-                            <label className="preview-box">
-                                Preview:
+                            <label className="preview-box" >Preview:
                                 <img src={previewUrl} alt="Voorbeeld van de afbeelding die zojuist gekozen is" className="image-preview"/>
                             </label>
                         }
@@ -260,6 +212,7 @@ function Register() {
                             />
                             <label className="label" htmlFor="agree-field">Ik ga akkoord met de voorwaarden</label>
                         </section>
+
                         <Button
                             styling="button"
                             toBeDisabled={!agreeTerms}

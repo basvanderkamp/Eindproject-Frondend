@@ -3,6 +3,7 @@ import axios from "axios";
 import {AuthContext} from "../../components/context/AuthContext";
 import {useParams} from "react-router-dom";
 import Button from "../../helpers/button/Button";
+import Section from "../../helpers/formSections/FormSection";
 
 
 
@@ -75,10 +76,8 @@ function ChangeAssignment() {
                     <h1 className="title">Hier kun je jouw opdracht wijzigen.</h1>
                     <p className="text-box">Vul de onderstaande velden in en klik op Wijzigen. Let op de titel is niet te wijzigen.</p>
                     <form className="form" >
-
-
                         <section>
-                            <label className="label" htmlFor="description-field">Omschrijving:</label>
+                            <label className="label">Omschrijving:</label>
                             <textarea
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
@@ -86,33 +85,22 @@ function ChangeAssignment() {
                                 cols={40}
                             />
                         </section>
-                        <section>
-                            <label className="label" htmlFor="essentials-field">Benodigdheden:</label>
-                            <input
-                                size={40}
-                                type="text"
-                                value={essentials}
-                                onChange={(e) => setEssentials(e.target.value)}
-                            />
-                        </section>
-                        <section>
-                            <label className="label" htmlFor="demands-field">Eisen:</label>
-                            <input
-                                size={40}
-                                type="text"
-                                value={demands}
-                                onChange={(e) => setDemands(e.target.value)}
-                            />
-                        </section>
-                        <section>
-                            <label className="label" htmlFor="reward-field">Beloning:</label>
-                            <input
-                                size={40}
-                                type="text"
-                                value={reward}
-                                onChange={(e) => setReward(e.target.value)}
-                            />
-                        </section>
+                        <Section
+                            labelText="Benodigdheden:"
+                            value={essentials}
+                            setValue={setEssentials}
+                        />
+                        <Section
+                            labelText="Eisen:"
+                            value={demands}
+                            setValue={setDemands}
+                        />
+                        <Section
+                            labelText="Beloning:"
+                            value={reward}
+                            setValue={setReward}
+                        />
+
                         <Button
                             styling="button"
                             functionCall={ChangeAssignment}

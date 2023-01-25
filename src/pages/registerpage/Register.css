@@ -1,15 +1,3 @@
-.label {
-    display: flex;
-    flex-direction: row;
-    margin-top: 4px;
-}
-.form {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    margin: 20px;
-    padding-bottom: 20px;
-}
 .terms {
     display: flex;
     flex-direction: row;
