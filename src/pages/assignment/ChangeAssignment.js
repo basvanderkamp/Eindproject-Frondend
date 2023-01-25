@@ -1,8 +1,8 @@
 import React, {useContext, useEffect, useState} from 'react';
-import "./Assignment.css"
 import axios from "axios";
 import {AuthContext} from "../../components/context/AuthContext";
 import {useParams} from "react-router-dom";
+import Button from "../../helpers/button/Button";
 
 
 
@@ -113,8 +113,11 @@ function ChangeAssignment() {
                                 onChange={(e) => setReward(e.target.value)}
                             />
                         </section>
-
-                        <button className="button" type="submit"  onClick={ChangeAssignment}>Wijzigen</button>
+                        <Button
+                            styling="button"
+                            functionCall={ChangeAssignment}
+                            buttonText="Wijzigen"
+                        />
                     </form>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react';
-import "./Assignment.css"
 import axios from "axios";
 import {AuthContext} from "../../components/context/AuthContext";
+import Button from "../../helpers/button/Button";
 
 
 
@@ -73,7 +73,6 @@ function Assignment() {
                         <section>
                             <label className="label" htmlFor="description-field">Omschrijving:</label>
                             <textarea
-                                size={40}
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
                                 rows={5}
@@ -107,7 +106,6 @@ function Assignment() {
                                 onChange={(e) => setReward(e.target.value)}
                             />
                         </section>
-
                         <section>
                             <label className="label" htmlFor="story-field">Bestand Kiezen:</label>
                             <input
@@ -118,8 +116,11 @@ function Assignment() {
 
                             />
                         </section>
-
-                        <button className="button" type="submit"  onClick={makeAssignment}>Verzend</button>
+                        <Button
+                            styling="button"
+                            functionCall={makeAssignment}
+                            buttonText="Verzend"
+                        />
                     </form>
 
                 </div>

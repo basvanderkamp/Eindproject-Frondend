@@ -1,4 +1,10 @@
-
+.tiles-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
 .tile-container {
     display: flex;
     flex-direction: row;
@@ -20,7 +26,6 @@
     background-color: #3F6C51;
     border-radius: 10px;
 }
-
 .tile-h2 {
     display: flex;
     flex-direction: row;
@@ -44,7 +49,6 @@
     margin-top: 20px;
     color: #FFFFEA;
     background-color: #3F6C51;
-
 }
 .tile-p {
     display: flex;
@@ -69,7 +73,6 @@
     background-color: #483C32;
     border-radius: 15px;
 }
-
 .tile-top-box {
     display: flex;
     flex-direction: column;
@@ -90,10 +93,9 @@
     color: #FFFFEA;
     border-radius: 100px;
     border: 2px solid #FFFFEA ;
-    width: 60px;
-    height: 60px;
+    width: 90px;
+    height: 70px;
 }
-
 .tile-button:hover {
     border: 4px solid #3F6C51;
     color: #3F6C51;

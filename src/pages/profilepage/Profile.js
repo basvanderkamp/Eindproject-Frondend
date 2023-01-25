@@ -5,6 +5,7 @@ import "./Profile.css"
 import fakeProfilePic from "./../../assets/profielfotoExample.jpg"
 import MyProjectTile from "../../components/projectTile/MyProjectTile";
 import AcceptedProjectTile from "../../components/projectTile/AcceptedProjectTile";
+import Button from "../../helpers/button/Button";
 
 
 
@@ -63,14 +64,22 @@ function Profile() {
                                 <li className="list">Email: {client.email}</li>
                             </ul>
                         </span>
-                        <button className="button profile-button" type="button" onClick={() => navigate('/assignments')} >Maak een project</button>
+                        <Button
+                            styling="button profile-button"
+                            functionCall={() => navigate('/assignments')}
+                            buttonText="Nieuw Project Maken"
+                        />
                     </div>
                     <div className="profile-container">
                         <span>
                             <h4 className="profile-head">Mijn Verhaal</h4>
                             <p className="profile-list">{client.story}</p>
                         </span>
-                        <button className="button profile-button" type="button" onClick={() => navigate('/projects')} >Help met een project</button>
+                        <Button
+                            styling="button profile-button"
+                            functionCall={() => navigate('/projects')}
+                            buttonText="Help met een project"
+                        />
                     </div>
                     <div className="bottom-box">
                         <div className="project-container">
@@ -90,8 +99,8 @@ function Profile() {
                                         {myProjects.map((assignment)=>{
                                             return(
                                                 <MyProjectTile key={assignment.id} assignment={assignment}/>
-                                            )
-                                        })
+                                                )
+                                            })
                                         }
                                     </ul>
                                 }
@@ -104,8 +113,8 @@ function Profile() {
                                         {activeProjects.map((assignment)=>{
                                             return(
                                                 <AcceptedProjectTile key={assignment.title} assignment={assignment}/>
-                                            )
-                                        })
+                                                )
+                                            })
                                         }
                                     </ul>
                                 }

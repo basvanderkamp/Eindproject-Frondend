@@ -28,7 +28,7 @@ const ProjectTile = ({assignment}) => {
     return(
     <>
         {assignment.assignmentStatus === "AVAILABLE" && assignment.client.username !== username &&
-        <div className="tiles-containter">
+        <div className="tiles-container">
             <div className="tile" key={assignment.id}>
                 <h2 className="tile-h2">{assignment.title}</h2>
                 <p className="tile-text">{assignment.description}</p>

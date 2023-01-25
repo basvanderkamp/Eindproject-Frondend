@@ -3,6 +3,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import "./Register.css"
 import axios from "axios";
 import {AuthContext} from "../../components/context/AuthContext";
+import Button from "../../helpers/button/Button";
 
 function Register() {
 
@@ -259,10 +260,14 @@ function Register() {
                             />
                             <label className="label" htmlFor="agree-field">Ik ga akkoord met de voorwaarden</label>
                         </section>
-
-                        <button className="button" type="submit" disabled={!agreeTerms} onClick={RegisterUser}>Registreren</button>
+                        <Button
+                            styling="button"
+                            toBeDisabled={!agreeTerms}
+                            functionCall={RegisterUser}
+                            buttonText="Registreren"
+                        />
                     </form>
-                    <p className="bottem-text">Heb je al een account? Je kunt je <Link to="/login">hier</Link> inloggen.</p>
+                    <p className="bottom-text">Heb je al een account? Je kunt je <Link to="/login">hier</Link> inloggen.</p>
                 </div>
             </div>
         </>

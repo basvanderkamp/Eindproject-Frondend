@@ -1,6 +1,7 @@
 import React, {useContext} from "react";
 import "./HomePage.css"
 import {AuthContext} from "../../components/context/AuthContext";
+import Button from "../../helpers/button/Button";
 
 
 
@@ -19,13 +20,11 @@ function HomePage() {
                                 Hier bij HomeProjects bent u op het juiste adres. laat u helpen door mensen uit uw omgeving.</p>
                             </span>
                             <span>
-                                <button
-                                    className="button"
-                                    type="button"
-                                    onClick={() => navigate('/register')}
-                                >
-                                Registreren
-                                </button>
+                                <Button
+                                    styling="button"
+                                    functionCall={() => navigate('/register')}
+                                    buttonText="Registreren"
+                                />
                             </span>
                         </div>
                         <div className="home-box2">

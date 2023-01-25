@@ -22,8 +22,6 @@ const AcceptedProjectTile = ({assignment}) => {
                 </div>
             </a>
         </>
-
     )
-
 }
 export default AcceptedProjectTile;

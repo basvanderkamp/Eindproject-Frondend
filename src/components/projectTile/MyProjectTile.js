@@ -2,6 +2,7 @@ import "./ProjectTiles.css"
 import React, {useContext} from "react";
 import {AuthContext} from "../context/AuthContext";
 import axios from "axios";
+import Button from "../../helpers/button/Button";
 
 
 
@@ -27,7 +28,7 @@ const MyProjectTile = ({assignment}) => {
 
     return(
         <>
-            <div className="tile-containter">
+            <div className="tile-container">
                 <div className="tile" key={assignment.id}>
                     <div className="tile-top-box">
                         <h2 className="tile-h2">{assignment.title}</h2>
@@ -42,8 +43,20 @@ const MyProjectTile = ({assignment}) => {
                         {assignment.assignmentStatus === "ACCEPTED" && <h3 className="tile-client">Uitvoerder: {assignment.executor.name}</h3>}
                     </div>
                     <div className="tile-bottom-box">
-                        {assignment.assignmentStatus === "AVAILABLE" && <button className="tile-button" type="button" onClick={() => navigate("/changeAssignment/" + assignment.title)} >wijzig</button>}
-                        {assignment.assignmentStatus === "FINISHED" && <button className="tile-button" type="button" onClick={() => DeleteProject(assignment.title)} >delete</button>}
+                        {assignment.assignmentStatus === "AVAILABLE" &&
+                            <Button
+                                styling="tile-button"
+                                functionCall={() => navigate("/changeAssignment/" + assignment.title)}
+                                buttonText="Wijzig"
+                            />
+                        }
+                        {assignment.assignmentStatus === "FINISHED" &&
+                            <Button
+                                styling="tile-button"
+                                functionCall={() => DeleteProject(assignment.title)}
+                                buttonText="Verwijder"
+                            />
+                        }
                     </div>
                 </div>
             </div>

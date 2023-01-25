@@ -3,6 +3,7 @@ import React, {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../../components/context/AuthContext";
 import {useNavigate, useParams} from "react-router-dom";
 import "./ExecuteProject.css"
+import Button from "../../helpers/button/Button";
 
 function ExecuteProject() {
 
@@ -85,13 +86,16 @@ function ExecuteProject() {
                             <p className="profile-list">Neem contact op met de opdrachtgever, de gegevens zie je hier boven. Wanneer de opdracht is uitgevoerd en je de beloning ontvangen hebt kun je de opdracht hier afsluiten. Dit doe je door op de knop hiernaast te klikken. </p>
                         </div>
                         <div className="box-right">
-                            <button className="button project-button" type="button" onClick={FinishProject} >Project afsluiten</button>
+                            <Button
+                                styling="button project-button"
+                                functionCall={FinishProject}
+                                buttonText="Project afsluiten"
+                            />
                         </div>
                     </div>
                 </div>
             </div>
         </>
     )
-
 }
 export default ExecuteProject

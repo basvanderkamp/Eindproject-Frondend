@@ -2,6 +2,7 @@ import React, {useContext, useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import {AuthContext} from "../../components/context/AuthContext"
 import axios from "axios";
+import Button from "../../helpers/button/Button";
 
 
 function Login() {
@@ -39,7 +40,6 @@ function Login() {
                 <h1 className="title">Inloggen</h1>
                 <p className="text-box">Vul de onderstaande velden in en klik op Log in.</p>
                 <form className="form">
-
                     <section>
                         <label className="label" htmlFor="user-field">Gebruikersnaam</label>
                         <input
@@ -60,15 +60,16 @@ function Login() {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </section>
-
-
-                    <button className="button" type="submit" disabled={!username || !password || isAuthenticated === true} onClick={loginUser}>Log in</button>
+                    <Button
+                        styling="button"
+                        toBeDisabled={!username || !password || isAuthenticated === true}
+                        functionCall={loginUser}
+                        buttonText="Log in"
+                    />
                 </form>
-
-                <p className="bottem-text" >Heb je nog geen account? <Link to="/register">Registreer</Link> je dan eerst.</p>
+                <p className="bottom-text" >Heb je nog geen account? <Link to="/register">Registreer</Link> je dan eerst.</p>
             </div>
         </div>
     );
 }
-
 export default Login;

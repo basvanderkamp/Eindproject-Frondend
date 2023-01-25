@@ -13,28 +13,24 @@ function Projects()  {
     const [list, setList] = useState([]);
     const {authAxios} = useContext(AuthContext);
 
-    const fetchAssignments = async () => {
+        const fetchAssignments = async () => {
 
-        try {
-            const response = await authAxios.get( `/assignments`, {});
-            setList(response.data);
-            console.log(response)
+            try {
+                const response = await authAxios.get( `/assignments`, {});
+                setList(response.data);
 
-
-        } catch ( e ) {
-            if(axios.isCancel(e)){
-                console.log('The axios request was cancelled')
-            } else {
-                console.error(e)
+            } catch ( e ) {
+                if(axios.isCancel(e)){
+                    console.log('The axios request was cancelled')
+                } else {
+                    console.error(e)
+                }
             }
         }
-
-
-    }
     useEffect( () => {
-        fetchAssignments()
+        void fetchAssignments()
 
-    }, [] )
+    })
 
     return(
         <div className="outer-box">
@@ -51,7 +47,7 @@ function Projects()  {
                                 return(
                                     <ProjectTile key={assignment.id} assignment={assignment}/>
                                 )
-                        })
+                            })
                         }
                     </ul>
                 }
@@ -59,9 +55,6 @@ function Projects()  {
 
         </div>
     )
-
-
-
 }
 export default Projects;
 
