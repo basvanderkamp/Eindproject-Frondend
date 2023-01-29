@@ -14,10 +14,9 @@ function AuthContextProvider({children}) {
     const [status, setStatus] = useState("pending");
 
     useEffect(()=> {
-        // haal de JWT op uit Local Storage
+
         const storedToken = localStorage.getItem('token')
 
-        // als er WEL een token is, haal dan opnieuw de gebruikersdata op
         if ( storedToken ) {
             const decodedToken = jwt_decode(storedToken)
 
@@ -31,7 +30,6 @@ function AuthContextProvider({children}) {
                 localStorage.removeItem( 'token' )
             }
         } else {
-            // als er GEEN token is doen we niks
             setStatus("done")
             setIsAuthenticated(false)
             navigate("/")
@@ -43,6 +41,7 @@ function AuthContextProvider({children}) {
         setIsAuthenticated(true)
         setStatus("done")
     }
+
     function logoutFunction() {
         setIsAuthenticated(false)
         console.log("gebruiker is uitgelogd")
@@ -65,9 +64,6 @@ function AuthContextProvider({children}) {
         },
     });
 
-
-
-
     const data = {
         isAuthenticated,
         username,
@@ -78,6 +74,7 @@ function AuthContextProvider({children}) {
         logout: logoutFunction,
         navigate,
     }
+
     return (
         <AuthContext.Provider value={data}>
             {status === "done" ? children : <p>Loading...</p>}

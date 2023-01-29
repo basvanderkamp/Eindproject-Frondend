@@ -30,7 +30,7 @@ function Projects()  {
     useEffect( () => {
         void fetchAssignments()
 
-    })
+    },[])
 
     return(
         <div className="outer-box">

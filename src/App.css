@@ -29,3 +29,16 @@ p {
 .bottom-box {
     margin-top: 60px;
 }
+.error-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    max-width: 200px;
+    max-height: 200px;
+}
+.error-text {
+    color: red;
+    margin: 5px;
+}

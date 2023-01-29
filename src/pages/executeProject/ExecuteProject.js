@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../../components/context/AuthContext";
-import {useNavigate, useParams} from "react-router-dom";
+import { useParams} from "react-router-dom";
 import "./ExecuteProject.css"
 import Button from "../../helpers/button/Button";
 
@@ -17,7 +17,6 @@ function ExecuteProject() {
             try {
                 const response = await authAxios.get( `/assignments/${id}`, {});
                 setAssignment(response.data);
-                console.log(response.data)
             } catch ( e ) {
                 if(axios.isCancel(e)){
                     console.log('The axios request was cancelled')
@@ -33,14 +32,28 @@ function ExecuteProject() {
     const FinishProject = async () => {
 
         try {
-            await authAxios.put( `/executors/${assignment.executor.name}/assignments/${assignment.title}`, {});
+            await authAxios.put( `/executors/${assignment.executor.name}/finishAssignments/${assignment.title}`, {});
         } catch ( e ) {
             if(axios.isCancel(e)){
                 console.log('The axios request was cancelled')
             } else {
                 console.error(e)
             }
-        }navigate("/profile")
+        }
+        navigate("/profile")
+    }
+    const CancelProject = async () => {
+
+        try {
+            await authAxios.put( `/executors/${assignment.executor.name}/cancelAssignments/${assignment.title}`, {});
+        } catch ( e ) {
+            if(axios.isCancel(e)){
+                console.log('The axios request was cancelled')
+            } else {
+                console.error(e)
+            }
+        }
+        navigate("/projects")
     }
 
     return(
@@ -50,20 +63,22 @@ function ExecuteProject() {
                     <div className="box">
                         <div className="box-left">
                             <h1 className="project-title">De Opdracht</h1>
-                                <span>
-                                    <h4 className="profile-head">Gegevens van de opdrachtgever</h4>
-                                        {assignment.client &&
-                                            <ul className="profile-list">
-                                                <li className="list">voornaam: {assignment.client.firstname}</li>
-                                                <li className="list">achternaam: {assignment.client.lastname}</li>
-                                                <li className="list">Mobiel: {assignment.client.mobile}</li>
-                                                <li className="list">Adres: {assignment.client.adres}</li>
-                                                <li className="list">Plaats: {assignment.client.place}</li>
-                                                <li className="list">Postcode: {assignment.client.zipcode}</li>
-                                                <li className="list">Email: {assignment.client.email}</li>
-                                            </ul>
-                                        }
-                                </span>
+                            <h4 className="profile-head">Bedankt voor het kiezen van deze opdracht</h4>
+                            <p className="profile-list">U kunt nu contact op nemen met de opdrachtgever. Hieronder ziet u de contact gegevens. De opdracht blijft op uw naam staan tot u hem zelf afsluit.</p>
+                            <span className="project-span">
+                                <h4 className="profile-head">Gegevens van de opdrachtgever</h4>
+                                    {assignment.client &&
+                                        <ul className="profile-list">
+                                            <li className="list">voornaam: {assignment.client.firstname}</li>
+                                            <li className="list">achternaam: {assignment.client.lastname}</li>
+                                            <li className="list">Mobiel: {assignment.client.mobile}</li>
+                                            <li className="list">Adres: {assignment.client.adres}</li>
+                                            <li className="list">Plaats: {assignment.client.place}</li>
+                                            <li className="list">Postcode: {assignment.client.zipcode}</li>
+                                            <li className="list">Email: {assignment.client.email}</li>
+                                        </ul>
+                                    }
+                            </span>
                         </div>
                         <div className="box-right">
                             {assignment &&
@@ -82,10 +97,15 @@ function ExecuteProject() {
                     </div>
                     <div className="box">
                         <div className="box-left">
-                            <h4 className="profile-head">Gegevens van de opdrachtgever</h4>
-                            <p className="profile-list">Neem contact op met de opdrachtgever, de gegevens zie je hier boven. Wanneer de opdracht is uitgevoerd en je de beloning ontvangen hebt kun je de opdracht hier afsluiten. Dit doe je door op de knop hiernaast te klikken. </p>
+                            <p>Gaat het hem na overleg toch niet worden? Je kunt de opdracht cancelen met de knop project cancelen.</p>
+                            <p>Wanneer het uitvoeren van de opdracht gelukt is kunt u hier rechts op project afsluiten klikken.</p>
                         </div>
                         <div className="box-right">
+                            <Button
+                                styling="button project-button"
+                                functionCall={CancelProject}
+                                buttonText="Project cancelen"
+                            />
                             <Button
                                 styling="button project-button"
                                 functionCall={FinishProject}

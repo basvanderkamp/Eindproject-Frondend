@@ -5,7 +5,6 @@ import Button from "../../helpers/button/Button";
 import Section from "../../helpers/formSections/FormSection";
 
 
-
 function Assignment() {
 
     const [title, setTitle] = useState('');
@@ -13,8 +12,14 @@ function Assignment() {
     const [essentials, setEssentials] = useState('');
     const [demands, setDemands] = useState('');
     const [reward, setReward] = useState('');
-    const [file, setFile] =useState();
     const {navigate, username, authAxios} = useContext(AuthContext);
+
+    let errorMessage;
+    if (description === "" || essentials === "" || demands === "" || reward === "") {
+        errorMessage = "U heeft nog niet alle invoervelden ingevuld!"
+    } else {
+        errorMessage = "";
+    }
 
     const makeAssignment = async (e) => {
         e.preventDefault();
@@ -34,8 +39,7 @@ function Assignment() {
                 console.error(e)
             }
         }
-        AssignAssignmentToClient();
-
+         void AssignAssignmentToClient();
     }
 
      const AssignAssignmentToClient = async () => {
@@ -91,8 +95,13 @@ function Assignment() {
                             setValue={setReward}
                         />
 
+                        <div className="error-box">
+                            <p className="error-text">{errorMessage}</p>
+                        </div>
+
                         <Button
                             styling="button"
+                            toBeDisabled={errorMessage === "U heeft nog niet alle invoervelden ingevuld!"}
                             functionCall={makeAssignment}
                             buttonText="Verzend"
                         />

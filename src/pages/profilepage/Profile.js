@@ -2,7 +2,6 @@ import axios from "axios";
 import React, {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../../components/context/AuthContext";
 import "./Profile.css"
-import fakeProfilePic from "./../../assets/profielfotoExample.jpg"
 import MyProjectTile from "../../components/projectTile/MyProjectTile";
 import AcceptedProjectTile from "../../components/projectTile/AcceptedProjectTile";
 import Button from "../../helpers/button/Button";
@@ -23,11 +22,10 @@ function Profile() {
 
             try {
                 const response = await authAxios.get( `/clients/${username}`, {});
-                console.log(response.data)
                 setClient(response.data);
                 setMyProjects(response.data.assignments)
                 setActiveProjects(response.data.executor.assignments)
-                setPicture("data:image/jpeg;base64," + response.data.fileDocument.docFile)
+                setPicture("data:image/*;base64," + response.data.fileDocument.docFile)
 
             } catch ( e ) {
                 if(axios.isCancel(e)){

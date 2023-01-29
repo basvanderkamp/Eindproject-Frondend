@@ -20,14 +20,14 @@ function App() {
             <NavBar/>
             <div className="content">
                 <Routes>
-                    <Route path="/" element={<HomePage/>}/>
-                    <Route path="/login" element={<Login/>}/>
+                    <Route path="/" element={<HomePage/>} />
                     <Route path="/register" element={<Register/>}/>
-                    <Route path="/profile" element={isAuthenticated ? <Profile /> : <Navigate to="/"/>}/>
-                    <Route path="/projects" element={isAuthenticated ? <Projects/> : <Navigate to="/"/>}/>
-                    <Route path="/assignments" element={isAuthenticated ? <Assignment/> : <Navigate to="/"/>}/>
-                    <Route path="/project/:id" element={isAuthenticated ? <ExecuteProject/>: <Navigate to="/"/>}/>
-                    <Route path="/changeAssignment/:id" element={isAuthenticated ? <ChangeAssignment/>: <Navigate to="/"/>}/>
+                    <Route path="/login" element={!isAuthenticated ? <Login/> : <Navigate to="/"/>} />
+                    <Route path="/profile" element={isAuthenticated ? <Profile /> : <Navigate to="/"/>} />
+                    <Route path="/projects" element={isAuthenticated ? <Projects/> : <Navigate to="/"/>} />
+                    <Route path="/assignments" element={isAuthenticated ? <Assignment/> : <Navigate to="/"/>} />
+                    <Route path="/project/:id" element={isAuthenticated ? <ExecuteProject/>: <Navigate to="/"/>} />
+                    <Route path="/changeAssignment/:id" element={isAuthenticated ? <ChangeAssignment/>: <Navigate to="/"/>} />
                 </Routes>
             </div>
             <Footer/>

@@ -5,8 +5,6 @@ import {useParams} from "react-router-dom";
 import Button from "../../helpers/button/Button";
 import Section from "../../helpers/formSections/FormSection";
 
-
-
 function ChangeAssignment() {
 
     const [description, setDescription] = useState('');
@@ -16,6 +14,13 @@ function ChangeAssignment() {
     const [client, setClient] = useState('')
     const {navigate, username, authAxios} = useContext(AuthContext);
     const { id } = useParams();
+
+    let errorMessage;
+    if (description === "" || essentials === "" || demands === "" || reward === "") {
+        errorMessage = "U heeft nog niet alle invoervelden ingevuld!"
+    } else {
+        errorMessage = "";
+    }
 
     useEffect( () => {
         const fetchAssignment = async () => {
@@ -63,7 +68,6 @@ function ChangeAssignment() {
             navigate("/")
             console.log("U bent niet de eigenaar van dit project en kunt hem dus niet wijzigen.")
         }
-
     }
 
 
@@ -101,8 +105,13 @@ function ChangeAssignment() {
                             setValue={setReward}
                         />
 
+                        <div className="error-box">
+                            <p className="error-text">{errorMessage}</p>
+                        </div>
+
                         <Button
                             styling="button"
+                            toBeDisabled={errorMessage === "U heeft nog niet alle invoervelden ingevuld!"}
                             functionCall={ChangeAssignment}
                             buttonText="Wijzigen"
                         />

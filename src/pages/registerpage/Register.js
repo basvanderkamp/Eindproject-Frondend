@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import "./Register.css"
 import axios from "axios";
 import {AuthContext} from "../../components/context/AuthContext";
@@ -20,12 +20,20 @@ function Register() {
     const [agreeTerms, toggleAgreeTerms] = useState(false);
     const [previewUrl, setPreviewUrl] = useState('');
     const [file, setFile] = useState('');
+    const [error, setError] = useState('');
+    let errorMessage;
 
     const {navigate, username, setUsername, noAuthAxios} = useContext(AuthContext);
 
+    if (username === ''|| password === '' || mobile === '' || adres === '' || place === '' || zipcode === '' || email === '' || story === '') {
+        errorMessage = "U heeft nog niet alle invoervelden ingevuld!"
+    } else {
+        errorMessage = ""
+    }
+
+
     const RegisterUser = async (e) => {
         e.preventDefault();
-
 
         try {
             const response = await noAuthAxios.post(`/users`, {
@@ -43,10 +51,9 @@ function Register() {
                 console.log('The axios request was cancelled')
             } else {
                 console.error(e.response.data.message)
+                setError(e.response.data.message)
             }
         }
-
-
     }
     const RegisterClient = async () => {
 
@@ -73,13 +80,12 @@ function Register() {
                 console.error(e)
             }
         }
-
     }
+
     const AssignClientToUser = async () => {
 
         try {
-            const response = await noAuthAxios.put(`/users/${username}/clients/${username}`, {
-                    })
+            const response = await noAuthAxios.put(`/users/${username}/clients/${username}`)
 
             if (response.status === 200){
                 void UploadProfilePicture()
@@ -91,7 +97,6 @@ function Register() {
                 console.error(e)
             }
         }
-
     }
 
     const UploadProfilePicture = async () => {
@@ -106,10 +111,10 @@ function Register() {
                         "Content-Type": "multipart/form-data"
                     },
                 })
+
             if (response.status === 200) {
                 navigate('/login')
             }
-
         } catch (e) {
             if (axios.isCancel(e)) {
                 console.log('The axios request was cancelled')
@@ -152,17 +157,17 @@ function Register() {
                         <Section
                             labelText="Achternaam:"
                             value={lastname}
-                            setValue={setLastname()}
+                            setValue={setLastname}
                         />
                         <Section
                             labelText="Telefoon nummer:"
                             value={mobile}
-                            setValue={setMobile()}
+                            setValue={setMobile}
                         />
                         <Section
                             labelText="Adres met huisnummer:"
                             value={adres}
-                            setValue={setAdres()}
+                            setValue={setAdres}
                         />
                         <Section
                             labelText="Plaats:"
@@ -212,6 +217,13 @@ function Register() {
                             />
                             <label className="label" htmlFor="agree-field">Ik ga akkoord met de voorwaarden</label>
                         </section>
+
+                        <div className="error-box">
+                            <p className="error-text">{errorMessage}</p>
+                            {!file && <p className="error-text">U heeft nog geen profielfoto gekozen</p>}
+                            {error && <p className="error-text">Gebruikersnaam is al in gebruik</p>}
+                            {!agreeTerms && <p className="error-text">U bent nog niet akkoord gegaan met de voorwaarden</p> }
+                        </div>
 
                         <Button
                             styling="button"

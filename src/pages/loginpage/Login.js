@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {AuthContext} from "../../components/context/AuthContext"
 import axios from "axios";
 import Button from "../../helpers/button/Button";
@@ -10,6 +10,7 @@ function Login() {
 
     const {navigate, isAuthenticated, noAuthAxios, login, username, setUsername} = useContext(AuthContext);
     const [password, setPassword] = useState('');
+    const [passwordRepeat, setPasswordRepeat] = useState('');
 
 
     const loginUser = async (e) => {
@@ -46,15 +47,32 @@ function Login() {
                         value={username}
                         setValue={setUsername}
                     />
-                    <Section
-                        labelText="Wachtwoord:"
-                        value={password}
-                        setValue={setPassword}
-                    />
+                    <section>
+                        <label className="label">Wachtwoord:</label>
+                        <input
+                            size={40}
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </section>
+                    <section>
+                        <label className="label">Wachtwoord herhalen:</label>
+                        <input
+                            size={40}
+                            type="password"
+                            value={passwordRepeat}
+                            onChange={(e) => setPasswordRepeat(e.target.value)}
+                        />
+                    </section>
+
+                    <div className="error-box">
+                        {password !== passwordRepeat && <p className="error-text">Wachtwoorden komen niet overeen!</p>}
+                    </div>
 
                     <Button
                         styling="button"
-                        toBeDisabled={!username || !password || isAuthenticated === true}
+                        toBeDisabled={!username || !password || password !== passwordRepeat}
                         functionCall={loginUser}
                         buttonText="Log in"
                     />
@@ -62,6 +80,6 @@ function Login() {
                 <p className="bottom-text" >Heb je nog geen account? <Link to="/register">Registreer</Link> je dan eerst.</p>
             </div>
         </div>
-    );
+    )
 }
 export default Login;
