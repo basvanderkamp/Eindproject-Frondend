@@ -1,0 +1,31 @@
+nav {
+    background-color: #3F6C51;
+    color: #FFFFEA;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 100px;
+}
+nav h1 {
+    background-color: #3F6C51;
+}
+nav h1:hover {
+    color: #483C32;
+}
+nav a,
+nav a:visited,
+nav a:active {
+    color: #FFFFEA;
+}
+nav a:hover {
+    color: #483C32;
+}
+nav a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #3F6C51;
+}
+.nav-box {
+    background-color: #3F6C51;
+}
+
